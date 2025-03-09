@@ -1,0 +1,25 @@
+[{
+  "_id": "Violation Issued",
+  "nInspectionsPerResult": 1291,
+  "inspectionsPercentage": 20.266875981161693
+},
+{
+  "_id": "Fail",
+  "nInspectionsPerResult": 1280,
+  "inspectionsPercentage": 20.09419152276295
+},
+{
+  "_id": "Warning Issued",
+  "nInspectionsPerResult": 1280,
+  "inspectionsPercentage": 20.09419152276295
+},
+{
+  "_id": "No Violation Issued",
+  "nInspectionsPerResult": 1260,
+  "inspectionsPercentage": 19.78021978021978
+},
+{
+  "_id": "Pass",
+  "nInspectionsPerResult": 1259,
+  "inspectionsPercentage": 19.76452119309262
+}]
