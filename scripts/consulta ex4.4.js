@@ -1,0 +1,1 @@
+[ {$match: {type_of_food:"Chinese"}}, {$sort: {rating: -1} }]

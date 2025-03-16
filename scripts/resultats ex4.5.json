@@ -1,0 +1,156 @@
+{
+    "explainVersion": "1",
+    "stages": [
+      {
+        "$cursor": {
+          "queryPlanner": {
+            "namespace": "Prac1.inspections",
+            "parsedQuery": {
+              "business_name": {
+                "$eq": "@ THAI RESTAURANT"
+              }
+            },
+            "indexFilterSet": false,
+            "queryHash": "DCD1CD5A",
+            "planCacheShapeHash": "DCD1CD5A",
+            "planCacheKey": "4A8E7972",
+            "optimizationTimeMillis": 0,
+            "maxIndexedOrSolutionsReached": false,
+            "maxIndexedAndSolutionsReached": false,
+            "maxScansToExplodeReached": false,
+            "prunedSimilarIndexes": false,
+            "winningPlan": {
+              "isCached": false,
+              "stage": "COLLSCAN",
+              "filter": {
+                "business_name": {
+                  "$eq": "@ THAI RESTAURANT"
+                }
+              },
+              "direction": "forward"
+            },
+            "rejectedPlans": []
+          },
+          "executionStats": {
+            "executionSuccess": true,
+            "nReturned": 6,
+            "executionTimeMillis": 3,
+            "totalKeysExamined": 0,
+            "totalDocsExamined": 6370,
+            "executionStages": {
+              "isCached": false,
+              "stage": "COLLSCAN",
+              "filter": {
+                "business_name": {
+                  "$eq": "@ THAI RESTAURANT"
+                }
+              },
+              "nReturned": 6,
+              "executionTimeMillisEstimate": 0,
+              "works": 6371,
+              "advanced": 6,
+              "needTime": 6364,
+              "needYield": 0,
+              "saveState": 1,
+              "restoreState": 1,
+              "isEOF": 1,
+              "direction": "forward",
+              "docsExamined": 6370
+            }
+          }
+        },
+        "nReturned": 6,
+        "executionTimeMillisEstimate": 0
+      },
+      {
+        "$addFields": {
+          "restaurant_id_obj": {
+            "$convert": {
+              "input": "$restaurant_id",
+              "to": { "$const": "objectId" }
+            }
+          }
+        },
+        "nReturned": 6,
+        "executionTimeMillisEstimate": 0
+      },
+      {
+        "$lookup": {
+          "from": "restaurants",
+          "as": "Info",
+          "localField": "restaurant_id_obj",
+          "foreignField": "_id"
+        },
+        "totalDocsExamined": 6,
+        "totalKeysExamined": 6,
+        "collectionScans": 0,
+        "indexesUsed": ["_id_"],
+        "nReturned": 6,
+        "executionTimeMillisEstimate": 3
+      }
+    ],
+    "queryShapeHash": "A6FE4B0EA7D17C4EFDFF73016ADEA98872617F8BF19B6B40AC35C524846A6930",
+    "serverInfo": {
+      "host": "cluster0-shard-00-01.nosw6.mongodb.net",
+      "port": 27017,
+      "version": "8.0.5",
+      "gitVersion": "cb9e2e5e552ee39dea1e39d7859336456d0c9820"
+    },
+    "serverParameters": {
+      "internalQueryFacetBufferSizeBytes": 104857600,
+      "internalQueryFacetMaxOutputDocSizeBytes": 104857600,
+      "internalLookupStageIntermediateDocumentMaxSizeBytes": 16793600,
+      "internalDocumentSourceGroupMaxMemoryBytes": 104857600,
+      "internalQueryMaxBlockingSortMemoryUsageBytes": 33554432,
+      "internalQueryProhibitBlockingMergeOnMongoS": 0,
+      "internalQueryMaxAddToSetBytes": 104857600,
+      "internalDocumentSourceSetWindowFieldsMaxMemoryBytes": 104857600,
+      "internalQueryFrameworkControl": "trySbeRestricted",
+      "internalQueryPlannerIgnoreIndexWithCollationForRegex": 1
+    },
+    "command": {
+      "aggregate": "inspections",
+      "pipeline": [
+        {
+          "$addFields": {
+            "restaurant_id_obj": {
+              "$toObjectId": "$restaurant_id"
+            }
+          }
+        },
+        {
+          "$lookup": {
+            "from": "restaurants",
+            "localField": "restaurant_id_obj",
+            "foreignField": "_id",
+            "as": "Info"
+          }
+        },
+        {
+          "$match": {
+            "business_name": "@ THAI RESTAURANT"
+          }
+        }
+      ],
+      "cursor": {},
+      "maxTimeMS": 60000,
+      "$db": "Prac1"
+    },
+    "ok": 1,
+    "$clusterTime": {
+      "clusterTime": {
+        "$timestamp": "7482354619050360834"
+      },
+      "signature": {
+        "hash": "GPkiX/vMu+9FJxjabmCqW4wxfxU=",
+        "keyId": {
+          "low": 3,
+          "high": 1728580739,
+          "unsigned": false
+        }
+      }
+    },
+    "operationTime": {
+      "$timestamp": "7482354619050360834"
+    }
+  }
